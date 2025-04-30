@@ -39,7 +39,8 @@ def card_comparison(card1, card2, lead_face):
     val1, face1 = card_breakdown(card1)
     val2, face2 = card_breakdown(card2)
 
-#finally getting to some if statement blocks
+    if face1 == face2:
+        return 
 
 
 
@@ -59,12 +60,7 @@ def card_comparison(card1, card2, lead_face):
 
 
 # CHECK LIST
-# create deck - done 
-# define hand deck
-# shuffling mechanic
-# dealing mech too? - maybe? recheck later
-# while if elif else loop for rounds
-# actual thing to combine the two defintions (value, face)
-### .split using "of" to combine 
-# 
+# coin flip mechanic for who goes first
+# dealing mech too? - DONE
+# while if elif else loop for rounds - next 
 

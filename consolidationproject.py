@@ -33,10 +33,6 @@ def randomize_card():
             used_cards.append(card)
             return card
 
-# quick test
-for test in range(8):
-    draw = randomize_card()
-    print(draw)
 
 
 

@@ -6,7 +6,7 @@ import random
 # defining and giving each aspect of the card a value and a face (AKA diamonds, hearts, etc etc)
 value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
-
+used_cards = {}
 value_dict = {"Ace":1, "2":2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':11, 'Queen':12}
 face_dict = {"Hearts":1, "Diamonds":2, "Spades":3, "Clubs":4}
 test_card = ["Ace", "Hearts"]

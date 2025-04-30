@@ -30,9 +30,13 @@ def randomize_card():
         xyz = random.choice(face)
         card = xy + ' of ' + xyz
         if card not in used_cards:
-            used_cards.append(deck)
+            used_cards.append(card)
             return card
 
+# quick test
+for test in range(8):
+    draw = randomize_card()
+    print(draw)
 
 
 

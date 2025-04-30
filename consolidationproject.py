@@ -40,7 +40,15 @@ def card_comparison(card1, card2, lead_face):
     val2, face2 = card_breakdown(card2)
 
     if face1 == face2:
-        return 
+        return "Player 1" if val1 > val2 else "Player 2"
+    elif face1 == lead_face and face2 != lead_face:
+        return "Player 1"
+    elif face2 == lead_face and face1 != lead_face:
+        return "Player 2"
+    else:
+        return "HA A TIE, starting player wins this round!"
+    #well as i wrote this i realized i need conditions for a tie so REDO
+
 
 
 

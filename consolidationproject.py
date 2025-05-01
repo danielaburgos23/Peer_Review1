@@ -55,8 +55,14 @@ def card_comparison(card1, card2, lead_face):
 
 play1_hand = []
 play2_hand = []
-dealer(hand, count)
-dealer(hand, count)
+
+dealer(play1_hand, 8)
+dealer(play2_hand, 8)
+scorep1 = 0
+scorep2 = 0
+round_leader = random.choice("Player 1", "Player 2")
+print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
+
 
 
         

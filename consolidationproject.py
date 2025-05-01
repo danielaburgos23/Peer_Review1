@@ -51,6 +51,13 @@ def card_comparison(card1, card2, lead_face):
     elif face2 == lead_face and face1 != lead_face:
         return "Player 2"
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+play1_hand = []
+play2_hand = []
+dealer(hand, count)
+dealer(hand, count)
+
 
         
     

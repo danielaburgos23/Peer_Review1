@@ -32,8 +32,8 @@ def dealer(hand, count):
             hand.append(deck.pop())
 
 def card_breakdown(card):
-    val1, face1 = card.join(' of ')
-    return value_dict[val1], face_dict[face1]
+    val, face = card.join(' of ')
+    return value_dict[val], face_dict[face]
 
 def card_comparison(card1, card2, lead_face):
     val1, face1 = card_breakdown(card1)
@@ -60,8 +60,10 @@ dealer(play1_hand, 8)
 dealer(play2_hand, 8)
 scorep1 = 0
 scorep2 = 0
-round_leader = random.choice("Player 1", "Player 2")
+round_leader = random.choice(["Player 1", "Player 2"])
 print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
+
+
 
 
 

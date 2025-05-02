@@ -31,14 +31,17 @@ def dealer(hand, count):
             used_cards.append(card)
             hand.append(deck.pop())
 
+# card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
 def card_breakdown(card):
     val, face = card.join(' of ')
     return value_dict[val], face_dict[face]
 
-def card_comparison(card1, card2, lead_face):
+# card comparison system/callback to decide winners of each round
+def card_comparison(card1, card2, lead_face, starting_player):
     val1, face1 = card_breakdown(card1)
     val2, face2 = card_breakdown(card2)
 
+# UNFINISHED *****
     if face1 == face2:
         if val1 > val2:
             return "Player 1"
@@ -60,8 +63,20 @@ dealer(play1_hand, 8)
 dealer(play2_hand, 8)
 scorep1 = 0
 scorep2 = 0
-round_leader = random.choice(["Player 1", "Player 2"])
+round_leader = random.choice("Player 1", "Player 2")
 print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
+
+# beginning of game code blocks
+
+#special conditions: shoot the moon mechanic
+for round_number in range(1, 17):
+
+    if scorep1 == 16 and scorep2 == 0:
+        print("Player 2 shoots the moon and WINS with 17 points!")
+    elif scorep2 == 16 and scorep1 == 0:
+        print("Player 1 shoots the moon and WINS with 17 points!")
+    else:
+        print("Final Scores:\n Player 1: {scorepr1}\n Player 2: {scorep2}")
 
 
 

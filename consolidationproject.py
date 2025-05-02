@@ -63,7 +63,7 @@ dealer(play1_hand, 8)
 dealer(play2_hand, 8)
 scorep1 = 0
 scorep2 = 0
-round_leader = random.choice("Player 1", "Player 2")
+round_leader = random.choice(["Player 1", "Player 2"])
 print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
 
 # beginning of game code blocks
@@ -76,7 +76,7 @@ for round_number in range(1, 17):
     elif scorep2 == 16 and scorep1 == 0:
         print("Player 1 shoots the moon and WINS with 17 points!")
     else:
-        print("Final Scores:\n Player 1: {scorepr1}\n Player 2: {scorep2}")
+        print("Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
 
 

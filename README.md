@@ -36,6 +36,7 @@ Two players go head-to-head in a strategic card game. Each round, both players s
 - Game is strictly two-player and requires exact manual inputs (e.g., "Queen of Hearts")
 - No GUI -- it's all terminal-based
 - Bug prevents cards from being listed even after reiterations/bug fixes have being made.
+- Due to this bug, you cannot progress the game unless you successfully guess each card in both hands since it is not displayed.
   
 ## Acknowledgements
-_Worked plenty of hours trying to make it work but I couldn't in the end. Very frustrating considering how close I was to making this work but I learned a lot from this project so I am still satisfied with the script I had built._
+_Worked plenty of hours trying to make it work but I couldn't in the end. Very frustrating considering how close I was to making it work but I learned a lot from this project so I am still satisfied with the script I had built._

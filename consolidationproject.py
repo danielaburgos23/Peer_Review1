@@ -97,10 +97,17 @@ for round_number in range(1, 17):
     if round_leader == "Player 1":
         card1 = input("Player 1, choose your card: ")
         while card1 not in play1_hand:
-            print("Invalid Choice. Try again: ")
+            print("Invalid choice. Try again: ")
             card1 = input("Player 1, choose your card: ")
         play1_hand.remove(card1)
         
+        card2 = input("Player 2, choose your card: ")
+        while card2 not in play2_hand
+            print("Invalid choice. Try again: ")
+            card2 = input("Player 2, choose your card: ")
+        play2_hand.remove(card2)
+    
+
 
 # burn card from deck @ end of each round (remember to put this at the very end of blocks)
     if deck:

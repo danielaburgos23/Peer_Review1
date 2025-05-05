@@ -8,7 +8,14 @@ value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
 used_cards = []
 deck = []
+
+#static values as variables
 starting_hand = 8
+redraw_cards = 4
+earlymax_score = 9
+max_score = 17 #shoot the moon makes it 17
+total_rounds = 16
+
 value_dict = {"Ace":1, "2":2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':11, 'Queen':12}
 face_dict = {"Hearts":1, "Diamonds":2, "Spades":3, "Clubs":4}
 test_card = ["Ace", "Hearts"]
@@ -49,26 +56,37 @@ def burn_card():
         used_cards.append(burned)
         print("Top card burned: ", burned)
 
+# function to potentially help bug fix
+def valid_cards(player_name, hand):
+    while True:
+        card = input(f"{player_name}, pick a card please!")
+        if card in hand:
+            hand.remove(card)
+            return card
+        print("Invalid choice. Please try again.")
+        
+
+
 # UNFINISHED *****
-    if face1 == face2:
-        if val1 > val2:
-            return "Player 1"
-        elif val2 > val1:
-            return "Player 2"
-        else:
-            return starting_player
-    elif face1 == lead_face and face2 != lead_face:
-        return "Player 1"
-    elif face2 == lead_face and face1 != lead_face:
-        return "Player 2"
+    # if face1 == face2:
+        # if val1 > val2:
+            # return "Player 1"
+        # elif val2 > val1:
+            # return "Player 2"
+        # else:
+            # return starting_player
+    # elif face1 == lead_face and face2 != lead_face:
+        # return "Player 1"
+    # elif face2 == lead_face and face1 != lead_face:
+        # return "Player 2"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
 play1_hand = []
 play2_hand = []
 
-dealer(play1_hand, 8)
-dealer(play2_hand, 8)
+dealer(play1_hand, starting_hand)
+dealer(play2_hand, starting_hand)
 scorep1 = 0
 scorep2 = 0
 round_leader = random.choice(["Player 1", "Player 2"])
@@ -76,7 +94,7 @@ print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will No
 
 # beginning of game code blocks
 
-for round_number in range(1, 17):
+for round_number in range(1, total_rounds, + 1):
 
 # special conditions: shoot the moon mechanic
     if scorep1 == 16 and scorep2 == 0:

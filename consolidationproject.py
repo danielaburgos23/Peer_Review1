@@ -42,6 +42,13 @@ def card_comparison(card1, card2, lead_face, starting_player):
     val1, face1 = card_breakdown(card1)
     val2, face2 = card_breakdown(card2)
 
+# burn card function
+def burn_card():
+    if deck:
+        burned = deck.pop(0)
+        used_cards.append(burned)
+        print("Top card burned: ", burned)
+
 # UNFINISHED *****
     if face1 == face2:
         if val1 > val2:
@@ -140,7 +147,3 @@ for round_number in range(1, 17):
 
 
 # burn card from deck @ end of each round (remember to put this at the very end of blocks)
-    if deck:
-        burned = deck.pop(0)
-        used_cards.append(burned)
-        print(f"Top card burned: {burned}")

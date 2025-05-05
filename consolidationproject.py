@@ -8,6 +8,7 @@ value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
 used_cards = []
 deck = []
+starting_hand = 8
 value_dict = {"Ace":1, "2":2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':11, 'Queen':12}
 face_dict = {"Hearts":1, "Diamonds":2, "Spades":3, "Clubs":4}
 test_card = ["Ace", "Hearts"]
@@ -33,7 +34,7 @@ def dealer(hand, count):
 
 # card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
 def card_breakdown(card):
-    val, face = card.join(' of ')
+    val, face = card.split(' of ')
     return value_dict[val], face_dict[face]
 
 # card comparison system/callback to decide winners of each round
@@ -88,8 +89,8 @@ for round_number in range(1, 17):
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
     if round_number in [5, 9]:
-        dealer(play1_hand, 4)
-        dealer(play2_hand, 4)
+        dealer(play1_hand, starting_hand)
+        dealer(play2_hand, starting_hand)
 
 # beginning of if/else/elif game code blocks
     print(f"Round: {round_number}\nPlayer 1's Hand: {play1_hand}\nPlayer 2's Hand: {play2_hand}")
@@ -99,58 +100,47 @@ for round_number in range(1, 17):
         while card1 not in play1_hand:
             print("Invalid choice. Try again: ")
             card1 = input("Player 1, choose your card: ")
+            print("Player 1's Hand: ", play1_hand)
         play1_hand.remove(card1)
         
         card2 = input("Player 2, choose your card: ")
-        while card2 not in play2_hand
+        while card2 not in play2_hand:
             print("Invalid choice. Try again: ")
             card2 = input("Player 2, choose your card: ")
+            print("Player 1's Hand: ", play1_hand)
         play2_hand.remove(card2)
-    
+    else:
+        card2 = input("Player 2, choose your card: ")
+        while card2 not in play2_hand:
+            print("Invalid choice. Try again: ")
+            card2 = input("Player 2, choose your card: ")
+            print("Player 1's Hand: ", play1_hand)
+        play2_hand.remove(card2)
+
+        card1 = input("Player 1, choose your card: ")
+        while card1 not in play1_hand:
+            print("Invalid choice. Try again: ")
+            card1 = input("Player 1, choose your card: ")
+            print("Player 1's Hand: ", play1_hand)
+        play1_hand.remove(card1)
+        
+    lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
+    results = card_comparison(card1, card2, lead_face, round_leader)
+
+    if results == "Player 1":
+        print("Player 1 wins this round!")
+        scorep1 += 1
+        round_leader = "Player 1"
+    elif results == "Player 2":
+        print("Player 1 wins this round!")
+        scorep1 += 1
+        round_leader = "Player 2"
+
+    print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2})
 
 
 # burn card from deck @ end of each round (remember to put this at the very end of blocks)
     if deck:
         burned = deck.pop(0)
-        used_cards = deck.append(burned)
+        used_cards.append(burned)
         print(f"Top card burned: {burned}")
-
-     
-
-    
-
-
-
-
-
-
-
-
-        
-    
-    
-        
-
-
-
-
-
-
-# save for later maybe 
-# def randomize_card():
-    # while True:
-        # xy = random.choice(value)
-        # xyz = random.choice(face)
-        # card = xy + ' of ' + xyz
-        # if card not in used_cards:
-            # used_cards.append(card)
-            # return card
-
-
-
-
-# CHECK LIST
-# coin flip mechanic for who goes first
-# dealing mech too? - DONE
-# while if elif else loop for rounds - next 
-

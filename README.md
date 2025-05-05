@@ -31,19 +31,6 @@ Two players go head-to-head in a strategic card game. Each round, both players s
   - 9-1 win triggers early victory
   - 16-0 win triggers Shoot the Moon (17-point win)
 
-## Concepts Demonstrated (Pattern Checklist Highlights)
-
-- Function definitions  
-- Loops (for, while)  
-- Conditionals (if/elif/else)  
-- Input validation  
-- Dictionaries for lookup  
-- Use of lists (deck, hand, used_cards)  
-- Modular file (`burn_module`)  
-- Use of constants and configuration values  
-- Basic randomness (`random.choice`)  
-- Game persistence across rounds
-
 ## Known Limitations
 
 - Game is strictly two-player and requires exact manual inputs (e.g., "Queen of Hearts")

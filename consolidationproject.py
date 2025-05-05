@@ -1,5 +1,5 @@
 # consolidation project. lock in. let's goooo.
-
+# 
 import os
 import random
 
@@ -16,19 +16,18 @@ earlymax_score = 9
 max_score = 17 #shoot the moon makes it 17
 total_rounds = 16
 
-value_dict = {"Ace":1, "2":2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':11, 'Queen':12}
-face_dict = {"Hearts":1, "Diamonds":2, "Spades":3, "Clubs":4}
-test_card = ["Ace", "Hearts"]
+value_dict = {"Ace": 1, "2": 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Jack': 11, 'Queen': 12}
+face_dict = {"Hearts": 1, "Diamonds": 2, "Spades": 3, "Clubs": 4}   
 
-# creating cards function heree (again)
+# creating cards function heree (again)ß
 def create_deck():
     complete_deck = []
     for value_thing in value:
         for face_thing in face:
             card = value_thing + ' of ' + face_thing
-            complete_deck.append(card)
-        random.shuffle(complete_deck)
-        return complete_deck
+            complete_deck.ap12pend(card)
+    random.shuffle(complete_deck)
+    return complete_deck
             
     
 #dealer mechanic, come back later, UPDATE cannot make it static to 8, considering the rules of the game give 4 fresh cards every 4 rounds
@@ -37,7 +36,7 @@ def dealer(hand, count):
         if deck:
             card = deck.pop()
             used_cards.append(card)
-            hand.append(deck.pop())
+            hand.append(card)
 
 # card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
 def card_breakdown(card):
@@ -56,7 +55,7 @@ def burn_card():
         used_cards.append(burned)
         print("Top card burned: ", burned)
 
-# function to potentially help bug fix
+# function to potentially help bug fix, basically what i wrote down earlier (view commits) but remade into a function to call back to
 def valid_cards(player_name, hand):
     while True:
         card = input(f"{player_name}, pick a card please!")
@@ -99,60 +98,45 @@ print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will No
 
 for round_number in range(1, total_rounds, + 1):
 
-# special conditions: shoot the moon mechanic
-    if scorep1 == 16 and scorep2 == 0:
-        print("Player 2 shoots the moon and WINS with 17 points!")
-    elif scorep2 == 16 and scorep1 == 0:
-        print("Player 1 shoots the moon and WINS with 17 points!")
-    else:
-        print("Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
-    
-# special conditions: early ending mechanic
-    if scorep1 >= earlymax_score and scorep2 == 1:
-        print("Early Ending! Player 1 Wins!")
-        break
-    elif scorep2 >= earlymax_score and scorep1 == 1:
-        print("Early Ending! Player 2 Wins!")
-        break
-
-# redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
-    if round_number in [5, 9]:
-        dealer(play1_hand, redraw_cards)
-        dealer(play2_hand, redraw_cards)
-
 # beginning of if/else/elif game code blocks
     print("Round: ", round_number)
     print("Player 1's Hand: ", play1_hand)
     print("\nPlayer 2's Hand: ", play2_hand)
 
     if round_leader == "Player 1":
-        card1 = input("Player 1, choose your card: ")
-        while card1 not in play1_hand:
-            print("Invalid choice. Try again: ")
-            card1 = input("Player 1, choose your card: ")
-            print("Player 1's Hand: ", play1_hand)
-        play1_hand.remove(card1)
-        
-        card2 = input("Player 2, choose your card: ")
-        while card2 not in play2_hand:
-            print("Invalid choice. Try again: ")
-            card2 = input("Player 2, choose your card: ")
-            print("Player 1's Hand: ", play1_hand)
-        play2_hand.remove(card2)
+        card1 = valid_cards("Player 1's hand: ", play1_hand)
+        card2 = valid_cards("Player 2's hand: ", play2_hand) 
     else:
-        card2 = input("Player 2, choose your card: ")
-        while card2 not in play2_hand:
-            print("Invalid choice. Try again: ")
-            card2 = input("Player 2, choose your card: ")
-            print("Player 1's Hand: ", play1_hand)
-        play2_hand.remove(card2)
+        card2 = valid_cards("Player 2's hand: ", play2_hand) 
+        card1 = valid_cards("Player 1's hand: ", play1_hand)
 
-        card1 = input("Player 1, choose your card: ")
-        while card1 not in play1_hand:
-            print("Invalid choice. Try again: ")
-            card1 = input("Player 1, choose your card: ")
-            print("Player 1's Hand: ", play1_hand)
-        play1_hand.remove(card1)
+    # if round_leader == "Player 1":
+        # card1 = input("Player 1, choose your card: ")
+        # while card1 not in play1_hand:
+            # print("Invalid choice. Try again: ")
+            # card1 = input("Player 1, choose your card: ")
+            # print("Player 1's Hand: ", play1_hand)
+        # play1_hand.remove(card1)
+        
+        # card2 = input("Player 2, choose your card: ")
+        # while card2 not in play2_hand:
+            # print("Invalid choice. Try again: ")
+            # card2 = input("Player 2, choose your card: ")
+            # print("Player 1's Hand: ", play1_hand)
+        # play2_hand.remove(card2)
+    # else:
+        # card2 = input("Player 2, choose your card: ")
+        # while card2 not in play2_hand:
+            # print("Invalid choice. Try again: ")
+            # print("Player 1's Hand: ", play1_hand)
+        # play2_hand.remove(card2)
+
+        # card1 = input("Player 1, choose your card: ")
+        # while card1 not in play1_hand:
+            # print("Invalid choice. Try again: ")
+            # card1 = input("Player 1, choose your card: ")
+            # print("Player 1's Hand: ", play1_hand)
+        # play1_hand.remove(card1)
         
     lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
     results = card_comparison(card1, card2, lead_face, round_leader)
@@ -168,5 +152,28 @@ for round_number in range(1, total_rounds, + 1):
 
     print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
+    # new via function
+    burn_card()
+
+# redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
+    if round_number in [5, 9]:
+        dealer(play1_hand, redraw_cards)
+        dealer(play2_hand, redraw_cards)
+
+# special conditions: shoot the moon mechanic
+if scorep1 == total_rounds and scorep2 == 0:
+    print("Player 2 shoots the moon and WINS with 17 points!")
+elif scorep2 == total_rounds and scorep1 == 0:
+    print("Player 1 shoots the moon and WINS with 17 points!")
+else:
+    print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
+    
+# special conditions: early ending mechanic
+    if scorep1 >+ earlymax_score and scorep2 == 1:
+        print("Early Ending! Player 1 Wins!")
+        
+    elif scorep2 >+ earlymax_score and scorep1 == 1:
+        print("Early Ending! Player 2 Wins!")
+       
 
 # burn card from deck @ end of each round (remember to put this at the very end of blocks)

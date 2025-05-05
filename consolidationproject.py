@@ -73,7 +73,6 @@ def valid_cards(player_name, hand):
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-# how. did. i forget. to call. one of the most important functions i made......... wow.
 create_deck()
 
 play1_hand = []

@@ -87,8 +87,10 @@ for round_number in range(1, 17):
         break
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
-    if deck:
-        
+    if round_number in [5, 9]:
+        dealer(play1_hand, 4)
+        dealer(play2_hand, 4)
+
 
 
 

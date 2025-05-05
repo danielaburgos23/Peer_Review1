@@ -2,13 +2,13 @@
 # 
 import os
 import random
+from burn_module import burn_card
 
 # defining and giving each aspect of the card a value and a face (AKA diamonds, hearts, etc etc)
 value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
 used_cards = []
 deck = []
-
 #static values as variables
 starting_hand = 8
 redraw_cards = 4
@@ -48,13 +48,6 @@ def card_comparison(card1, card2, lead_face, starting_player):
     val1, face1 = card_breakdown(card1)
     val2, face2 = card_breakdown(card2)
 
-# burn card function
-def burn_card():
-    if deck:
-        burned = deck.pop(0)
-        used_cards.append(burned)
-        print("Top card burned: ", burned)
-
 # function to potentially help bug fix, basically what i wrote down earlier (view commits) but remade into a function to call back to
 def valid_cards(player_name, hand):
     while True:
@@ -82,7 +75,7 @@ def valid_cards(player_name, hand):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
 # how. did. i forget. to call. one of the most important functions i made......... wow.
-deck = create_deck()
+create_deck()
 
 play1_hand = []
 play2_hand = []

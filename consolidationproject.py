@@ -91,6 +91,22 @@ for round_number in range(1, 17):
         dealer(play1_hand, 4)
         dealer(play2_hand, 4)
 
+    print(f"Round: {round_number}\nPlayer 1's Hand: {play1_hand}\nPlayer 2's Hand: {play2_hand}")
+
+    if round_leader 
+
+# burn card from deck @ end of each round (remember to put this at the very end of blocks)
+    if deck:
+        burned = deck.pop(0)
+        used_cards = deck.append(burned)
+        print(f"Top card burned: {burned}")
+
+     
+
+    
+
+
+
 
 
 

@@ -82,6 +82,9 @@ def valid_cards(player_name, hand):
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
+# how. did. i forget. to call. one of the most important functions i made......... wow.
+deck = create_deck()
+
 play1_hand = []
 play2_hand = []
 
@@ -105,10 +108,10 @@ for round_number in range(1, total_rounds, + 1):
         print("Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
     
 # special conditions: early ending mechanic
-    if scorep1 >= 9 and scorep2 == 1:
+    if scorep1 >= earlymax_score and scorep2 == 1:
         print("Early Ending! Player 1 Wins!")
         break
-    elif scorep2 >= 9 and scorep1 == 1:
+    elif scorep2 >= earlymax_score and scorep1 == 1:
         print("Early Ending! Player 2 Wins!")
         break
 
@@ -118,7 +121,9 @@ for round_number in range(1, total_rounds, + 1):
         dealer(play2_hand, redraw_cards)
 
 # beginning of if/else/elif game code blocks
-    print(f"Round: {round_number}\nPlayer 1's Hand: {play1_hand}\nPlayer 2's Hand: {play2_hand}")
+    print("Round: ", round_number)
+    print("Player 1's Hand: ", play1_hand)
+    print("\nPlayer 2's Hand: ", play2_hand)
 
     if round_leader == "Player 1":
         card1 = input("Player 1, choose your card: ")
@@ -161,7 +166,7 @@ for round_number in range(1, total_rounds, + 1):
         scorep1 += 1
         round_leader = "Player 2"
 
-    print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2})
+    print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
 
 # burn card from deck @ end of each round (remember to put this at the very end of blocks)

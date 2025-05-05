@@ -80,7 +80,15 @@ for round_number in range(1, 17):
     
 # special conditions: early ending mechanic
     if scorep1 >= 9 and scorep2 == 1:
-        print()
+        print("Early Ending! Player 1 Wins!")
+        break
+    elif scorep2 >= 9 and scorep1 == 1:
+        print("Early Ending! Player 2 Wins!")
+        break
+
+# redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
+    if deck:
+        
 
 
 

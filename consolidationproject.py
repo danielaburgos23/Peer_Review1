@@ -68,15 +68,19 @@ print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will No
 
 # beginning of game code blocks
 
-#special conditions: shoot the moon mechanic
 for round_number in range(1, 17):
 
+# special conditions: shoot the moon mechanic
     if scorep1 == 16 and scorep2 == 0:
         print("Player 2 shoots the moon and WINS with 17 points!")
     elif scorep2 == 16 and scorep1 == 0:
         print("Player 1 shoots the moon and WINS with 17 points!")
     else:
         print("Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
+    
+# special conditions: early ending mechanic
+    if scorep1 >= 9 and scorep2 == 1:
+        print()
 
 
 

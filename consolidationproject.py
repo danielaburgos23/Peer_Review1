@@ -1,5 +1,4 @@
 # consolidation project. lock in. let's goooo.
-# 
 import os
 import random
 from burn_module import burn_card
@@ -145,7 +144,7 @@ for round_number in range(1, total_rounds, + 1):
 
     print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
-    # new via function
+    # new via module
     burn_card()
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
@@ -167,6 +166,3 @@ else:
         
     elif scorep2 >+ earlymax_score and scorep1 == 1:
         print("Early Ending! Player 2 Wins!")
-       
-
-# burn card from deck @ end of each round (remember to put this at the very end of blocks)

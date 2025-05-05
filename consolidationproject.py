@@ -91,9 +91,16 @@ for round_number in range(1, 17):
         dealer(play1_hand, 4)
         dealer(play2_hand, 4)
 
+# beginning of if/else/elif game code blocks
     print(f"Round: {round_number}\nPlayer 1's Hand: {play1_hand}\nPlayer 2's Hand: {play2_hand}")
 
-    if round_leader 
+    if round_leader == "Player 1":
+        card1 = input("Player 1, choose your card: ")
+        while card1 not in play1_hand:
+            print("Invalid Choice. Try again: ")
+            card1 = input("Player 1, choose your card: ")
+        play1_hand.remove(card1)
+        
 
 # burn card from deck @ end of each round (remember to put this at the very end of blocks)
     if deck:

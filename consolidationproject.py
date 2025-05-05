@@ -64,7 +64,7 @@ def valid_cards(player_name, hand):
             hand.remove(card)
             return card
         print("Invalid choice. Please try again.")
-        
+
 
 
 # UNFINISHED *****
@@ -114,8 +114,8 @@ for round_number in range(1, total_rounds, + 1):
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
     if round_number in [5, 9]:
-        dealer(play1_hand, starting_hand)
-        dealer(play2_hand, starting_hand)
+        dealer(play1_hand, redraw_cards)
+        dealer(play2_hand, redraw_cards)
 
 # beginning of if/else/elif game code blocks
     print(f"Round: {round_number}\nPlayer 1's Hand: {play1_hand}\nPlayer 2's Hand: {play2_hand}")

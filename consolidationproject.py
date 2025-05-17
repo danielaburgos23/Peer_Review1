@@ -18,24 +18,25 @@ total_rounds = 16
 value_dict = {"Ace": 1, "2": 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Jack': 11, 'Queen': 12}
 face_dict = {"Hearts": 1, "Diamonds": 2, "Spades": 3, "Clubs": 4}   
 
-# creating cards function heree (again)ß
+# creating cards function heree (again)
 def create_deck():
     complete_deck = []
     for value_thing in value:
         for face_thing in face:
             card = value_thing + ' of ' + face_thing
-            complete_deck.ap12pend(card)
+            complete_deck.append(card)
     random.shuffle(complete_deck)
     return complete_deck
             
     
-#dealer mechanic, come back later, UPDATE cannot make it static to 8, considering the rules of the game give 4 fresh cards every 4 rounds
-def dealer(hand, count):
+#dealer mechanic, come back later, back working on this mech again (5/17)
+def dealer(hand, count, deck, used_cards):
     for xx in range(count):
         if deck:
             card = deck.pop()
-            used_cards.append(card)
             hand.append(card)
+            used_cards.append(card)
+            
 
 # card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
 def card_breakdown(card):
@@ -160,8 +161,9 @@ else:
     print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
     
 # special conditions: early ending mechanic
-    if scorep1 >+ earlymax_score and scorep2 == 1:
-        print("Early Ending! Player 1 Wins!")
+if scorep1 >+ earlymax_score and scorep2 == 1:
+    print("Early Ending! Player 1 Wins!")
         
-    elif scorep2 >+ earlymax_score and scorep1 == 1:
-        print("Early Ending! Player 2 Wins!")
+elif scorep2 >+ earlymax_score and scorep1 == 1:
+    print("Early Ending! Player 2 Wins!")
+

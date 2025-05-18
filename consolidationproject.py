@@ -41,6 +41,11 @@ def create_deck():
     
 #dealer mechanic, come back later, back working on this mech again (5/17)
 def dealer(hand, count, deck, used_cards):
+    """
+    
+    Deals a number of cards to a player's hand, 8 in this case.
+    
+    """
     for xx in range(count):
         if deck:
             card = deck.pop()
@@ -50,16 +55,31 @@ def dealer(hand, count, deck, used_cards):
 
 # card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
 def card_breakdown(card):
+    """
+    
+    Splits a card string into its # value and face rank to prevent repeat cards.
+    
+    """
     val, face = card.split(' of ')
     return value_dict[val], face_dict[face]
 
 # card comparison system/callback to decide winners of each round
 def card_comparison(card1, card2, lead_face, starting_player):
+    """
+    
+    Compares the two players' cards and returns the round winner.
+    
+    """
     val1, face1 = card_breakdown(card1)
     val2, face2 = card_breakdown(card2)
 
-# function to potentially help bug fix, basically what i wrote down earlier (view commits) but remade into a function to call back to
+# checks to see if player card chosen is valid
 def valid_cards(player_name, hand):
+    """
+    
+    Makes sure the player picks a valid card from their hand.
+    
+    """
     while True:
         card = input(f"{player_name}, pick a card please!")
         if card in hand:

@@ -1,13 +1,15 @@
 # consolidation project. lock in. let's goooo.
 import os
 import random
+import time
 from burn_module import burn_card
 
 # defining and giving each aspect of the card a value and a face (AKA diamonds, hearts, etc etc)
 value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
 used_cards = []
-deck = []
+# deck = []
+
 #static values as variables
 starting_hand = 8
 redraw_cards = 4
@@ -81,8 +83,10 @@ play2_hand = []
 
 dealer(play1_hand, starting_hand)
 dealer(play2_hand, starting_hand)
+
 scorep1 = 0
 scorep2 = 0
+
 round_leader = random.choice(["Player 1", "Player 2"])
 print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
 
@@ -146,6 +150,8 @@ for round_number in range(1, total_rounds, + 1):
 
     # new via module
     burn_card()
+
+    time.sleep(2.0)
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
     if round_number in [5, 9]:

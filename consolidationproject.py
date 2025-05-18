@@ -75,101 +75,104 @@ def valid_cards(player_name, hand):
         # return "Player 2"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+def main():
+    deck = create_deck()
 
-create_deck()
+    play1_hand = []
+    play2_hand = []
 
-play1_hand = []
-play2_hand = []
+    dealer(play1_hand, starting_hand, deck)
+    dealer(play2_hand, starting_hand, deck)
 
-dealer(play1_hand, starting_hand)
-dealer(play2_hand, starting_hand)
+    scorep1 = 0
+    scorep2 = 0
 
-scorep1 = 0
-scorep2 = 0
-
-round_leader = random.choice(["Player 1", "Player 2"])
-print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
+    round_leader = random.choice(["Player 1", "Player 2"])
+    print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
 
 # beginning of game code blocks
 
-for round_number in range(1, total_rounds, + 1):
+    for round_number in range(1, total_rounds, + 1):
 
 # beginning of if/else/elif game code blocks
-    print("Round: ", round_number)
-    print("Player 1's Hand: ", play1_hand)
-    print("\nPlayer 2's Hand: ", play2_hand)
+        print("Round: ", round_number)
+        print("Player 1's Hand: ", play1_hand)
+        print("\nPlayer 2's Hand: ", play2_hand)
 
-    if round_leader == "Player 1":
-        card1 = valid_cards("Player 1's hand: ", play1_hand)
-        card2 = valid_cards("Player 2's hand: ", play2_hand) 
-    else:
-        card2 = valid_cards("Player 2's hand: ", play2_hand) 
-        card1 = valid_cards("Player 1's hand: ", play1_hand)
+        if round_leader == "Player 1":
+            card1 = valid_cards("Player 1's hand: ", play1_hand)
+            card2 = valid_cards("Player 2's hand: ", play2_hand) 
+        else:
+            card2 = valid_cards("Player 2's hand: ", play2_hand) 
+            card1 = valid_cards("Player 1's hand: ", play1_hand)
 
-    # if round_leader == "Player 1":
-        # card1 = input("Player 1, choose your card: ")
-        # while card1 not in play1_hand:
-            # print("Invalid choice. Try again: ")
+        # if round_leader == "Player 1":
             # card1 = input("Player 1, choose your card: ")
-            # print("Player 1's Hand: ", play1_hand)
-        # play1_hand.remove(card1)
-        
-        # card2 = input("Player 2, choose your card: ")
-        # while card2 not in play2_hand:
-            # print("Invalid choice. Try again: ")
+            # while card1 not in play1_hand:
+                # print("Invalid choice. Try again: ")
+                # card1 = input("Player 1, choose your card: ")
+                # print("Player 1's Hand: ", play1_hand)
+            # play1_hand.remove(card1)
+            
             # card2 = input("Player 2, choose your card: ")
-            # print("Player 1's Hand: ", play1_hand)
-        # play2_hand.remove(card2)
-    # else:
-        # card2 = input("Player 2, choose your card: ")
-        # while card2 not in play2_hand:
-            # print("Invalid choice. Try again: ")
-            # print("Player 1's Hand: ", play1_hand)
-        # play2_hand.remove(card2)
+            # while card2 not in play2_hand:
+                # print("Invalid choice. Try again: ")
+                # card2 = input("Player 2, choose your card: ")
+                # print("Player 1's Hand: ", play1_hand)
+            # play2_hand.remove(card2)
+        # else:
+            # card2 = input("Player 2, choose your card: ")
+            # while card2 not in play2_hand:
+                # print("Invalid choice. Try again: ")
+                # print("Player 1's Hand: ", play1_hand)
+            # play2_hand.remove(card2)
 
-        # card1 = input("Player 1, choose your card: ")
-        # while card1 not in play1_hand:
-            # print("Invalid choice. Try again: ")
             # card1 = input("Player 1, choose your card: ")
-            # print("Player 1's Hand: ", play1_hand)
-        # play1_hand.remove(card1)
+            # while card1 not in play1_hand:
+                # print("Invalid choice. Try again: ")
+                # card1 = input("Player 1, choose your card: ")
+                # print("Player 1's Hand: ", play1_hand)
+            # play1_hand.remove(card1)
         
-    lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
-    results = card_comparison(card1, card2, lead_face, round_leader)
+        lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
+        results = card_comparison(card1, card2, lead_face, round_leader)
 
-    if results == "Player 1":
-        print("Player 1 wins this round!")
-        scorep1 += 1
-        round_leader = "Player 1"
-    elif results == "Player 2":
-        print("Player 1 wins this round!")
-        scorep1 += 1
-        round_leader = "Player 2"
+        if results == "Player 1":
+            print("Player 1 wins this round!")
+            scorep1 += 1
+            round_leader = "Player 1"
+        elif results == "Player 2":
+            print("Player 1 wins this round!")
+            scorep1 += 1
+            round_leader = "Player 2"
 
-    print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
+        print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
-    # new via module
-    burn_card()
+        # new via module
+        burn_card()
 
-    time.sleep(2.0)
+        time.sleep(2.0)
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
-    if round_number in [5, 9]:
-        dealer(play1_hand, redraw_cards)
-        dealer(play2_hand, redraw_cards)
+        if round_number in [5, 9]:
+            dealer(play1_hand, redraw_cards)
+            dealer(play2_hand, redraw_cards)
 
-# special conditions: shoot the moon mechanic
-if scorep1 == total_rounds and scorep2 == 0:
-    print("Player 2 shoots the moon and WINS with 17 points!")
-elif scorep2 == total_rounds and scorep1 == 0:
-    print("Player 1 shoots the moon and WINS with 17 points!")
-else:
-    print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
-    
-# special conditions: early ending mechanic
-if scorep1 >+ earlymax_score and scorep2 == 1:
-    print("Early Ending! Player 1 Wins!")
+    # special conditions: shoot the moon mechanic
+    if scorep1 == total_rounds and scorep2 == 0:
+        print("Player 2 shoots the moon and WINS with 17 points!")
+    elif scorep2 == total_rounds and scorep1 == 0:
+        print("Player 1 shoots the moon and WINS with 17 points!")
+    else:
+        print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
         
-elif scorep2 >+ earlymax_score and scorep1 == 1:
-    print("Early Ending! Player 2 Wins!")
+    # special conditions: early ending mechanic
+    if scorep1 >+ earlymax_score and scorep2 == 1:
+        print("Early Ending! Player 1 Wins!")
+            
+    elif scorep2 >+ earlymax_score and scorep1 == 1:
+        print("Early Ending! Player 2 Wins!")
+
+if __name__ == "__main__":
+    main()
 

@@ -1,11 +1,11 @@
-# consolidation project. lock in. let's goooo.
+# consolidation project.
 import os
 import random
 import time
 from burn_module import burn_card
 
 # defining and giving each aspect of the card a value and a face (AKA diamonds, hearts, etc etc)
-value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
 used_cards = []
 # deck = []
@@ -28,6 +28,7 @@ def create_deck():
    
     """
     return[f"{v} of {f}" for v in value for f in face]
+
 
 #other variation of above^ except 100 steps longer
     # complete_deck = []
@@ -72,6 +73,17 @@ def card_comparison(card1, card2, lead_face, starting_player):
     """
     val1, face1 = card_breakdown(card1)
     val2, face2 = card_breakdown(card2)
+    if face1 == face2:
+        if val1 > val2:
+            return "Player 1"
+        elif val2 > val1:
+            return "Player 2"
+        else:
+            return starting_player
+    elif face1 == lead_face and face2 != lead_face:
+        return "Player 1"
+    elif face2 == lead_face and face1 != lead_face:
+        return "Player 2"
 
 # checks to see if player card chosen is valid
 def valid_cards(player_name, hand):
@@ -105,6 +117,7 @@ def valid_cards(player_name, hand):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 def main():
     deck = create_deck()
+    random.shuffle(deck)
 
     play1_hand = []
     play2_hand = []
@@ -182,9 +195,9 @@ def main():
         time.sleep(2.0)
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
-        if round_number in [5, 9]:
-            dealer(play1_hand, redraw_cards)
-            dealer(play2_hand, redraw_cards)
+        if round_number in [4, 8]:
+            dealer(play1_hand, redraw_cards, deck, used_cards)
+            dealer(play2_hand, redraw_cards, deck, used_cards)
 
     # special conditions: shoot the moon mechanic
     if scorep1 == total_rounds and scorep2 == 0:

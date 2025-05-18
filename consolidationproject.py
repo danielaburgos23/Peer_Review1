@@ -22,14 +22,22 @@ face_dict = {"Hearts": 1, "Diamonds": 2, "Spades": 3, "Clubs": 4}
 
 # creating cards function heree (again)
 def create_deck():
-    complete_deck = []
-    for value_thing in value:
-        for face_thing in face:
-            card = value_thing + ' of ' + face_thing
-            complete_deck.append(card)
-    random.shuffle(complete_deck)
-    return complete_deck
-            
+    """
+
+    Creates and shuffles a standard deck without the Kings face card.
+   
+    """
+    return[f"{v} of {f}" for v in value for f in face]
+
+#other variation of above^ except 100 steps longer
+    # complete_deck = []
+    # for value_thing in value:
+        # for face_thing in face:
+            # card = value_thing + ' of ' + face_thing
+            # complete_deck.append(card)
+    # random.shuffle(complete_deck)
+    # return complete_deck
+
     
 #dealer mechanic, come back later, back working on this mech again (5/17)
 def dealer(hand, count, deck, used_cards):

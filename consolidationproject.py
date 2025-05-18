@@ -81,8 +81,8 @@ def main():
     play1_hand = []
     play2_hand = []
 
-    dealer(play1_hand, starting_hand, deck)
-    dealer(play2_hand, starting_hand, deck)
+    dealer(play1_hand, starting_hand, deck, used_cards)
+    dealer(play2_hand, starting_hand, deck, used_cards)
 
     scorep1 = 0
     scorep2 = 0
@@ -149,7 +149,7 @@ def main():
         print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
         # new via module
-        burn_card()
+        burn_card(deck, used_cards)
 
         time.sleep(2.0)
 

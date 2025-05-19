@@ -209,9 +209,23 @@ def main():
         time.sleep(2.0)
 
 # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
-        if round_number in [4, 8]:
+        if round_number in [5, 9]:
             dealer(play1_hand, redraw_cards, deck, used_cards)
             dealer(play2_hand, redraw_cards, deck, used_cards)
+
+    if scorep1 == total_rounds and scorep2 == 0:
+            print("Player 2 shoots the moon and WINS with 17 points!")
+    elif scorep2 == total_rounds and scorep1 == 0:
+            print("Player 1 shoots the moon and WINS with 17 points!")
+    else:
+            print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
+        
+    # special conditions: early ending mechanic
+    if scorep1 >+ earlymax_score and scorep2 == 1:
+            print("Early Ending! Player 1 Wins!")
+            
+    elif scorep2 >+ earlymax_score and scorep1 == 1:
+            print("Early Ending! Player 2 Wins!")
 
 if __name__ == "__main__":
     main()

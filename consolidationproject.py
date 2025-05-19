@@ -86,7 +86,7 @@ def card_comparison(card1, card2, lead_face, starting_player):
         return "Player 2"
 
 # checks to see if player card chosen is valid
-def valid_cards(player_name, hand, lead_face):
+def valid_cards(player_name, hand, lead_face=None):
     """
     
     Makes sure the player picks a valid card from their hand.

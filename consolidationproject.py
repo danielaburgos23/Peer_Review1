@@ -183,8 +183,8 @@ def main():
             scorep1 += 1
             round_leader = "Player 1"
         elif results == "Player 2":
-            print("Player 1 wins this round!")
-            scorep1 += 1
+            print("Player 2 wins this round!")
+            scorep2 += 1
             round_leader = "Player 2"
 
         print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
@@ -199,21 +199,5 @@ def main():
             dealer(play1_hand, redraw_cards, deck, used_cards)
             dealer(play2_hand, redraw_cards, deck, used_cards)
 
-    # special conditions: shoot the moon mechanic
-    if scorep1 == total_rounds and scorep2 == 0:
-        print("Player 2 shoots the moon and WINS with 17 points!")
-    elif scorep2 == total_rounds and scorep1 == 0:
-        print("Player 1 shoots the moon and WINS with 17 points!")
-    else:
-        print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
-        
-    # special conditions: early ending mechanic
-    if scorep1 >+ earlymax_score and scorep2 == 1:
-        print("Early Ending! Player 1 Wins!")
-            
-    elif scorep2 >+ earlymax_score and scorep1 == 1:
-        print("Early Ending! Player 2 Wins!")
-
 if __name__ == "__main__":
     main()
-

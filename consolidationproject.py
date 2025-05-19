@@ -86,7 +86,7 @@ def card_comparison(card1, card2, lead_face, starting_player):
         return "Player 2"
 
 # checks to see if player card chosen is valid
-def valid_cards(player_name, hand):
+def valid_cards(player_name, hand, lead_face):
     """
     
     Makes sure the player picks a valid card from their hand.
@@ -94,10 +94,24 @@ def valid_cards(player_name, hand):
     """
     while True:
         card = input(f"{player_name}, pick a card please!")
-        if card in hand:
-            hand.remove(card)
-            return card
-        print("Invalid choice. Please try again.")
+        
+        if card not in hand:
+            print("Invalid choice. Please try again.")
+            continue
+        # new addition, re-check after new playthrough
+
+        card_face = card.split(" of ")[1]
+        player_lead = False
+        for h in hand:
+            suit = h.split(" of ")[1]
+            if suit == lead_face:
+                player_lead = True
+                break
+        if player_lead and card_face != lead_face:
+            print("You must choose a card with the same suit: {lead_face}. Please Try again!: ")
+            continue
+        hand.remove(card)
+        return card
 
 
 

@@ -118,21 +118,6 @@ def valid_cards(player_name, hand, lead_face=None):
         hand.remove(card)
         return card
 
-
-
-# UNFINISHED *****
-    # if face1 == face2:
-        # if val1 > val2:
-            # return "Player 1"
-        # elif val2 > val1:
-            # return "Player 2"
-        # else:
-            # return starting_player
-    # elif face1 == lead_face and face2 != lead_face:
-        # return "Player 1"
-    # elif face2 == lead_face and face1 != lead_face:
-        # return "Player 2"
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 def main():
     deck = create_deck()
@@ -140,12 +125,17 @@ def main():
 
     play1_hand = []
     play2_hand = []
-
+    
+    #dealer mechanic to deal cards and rid of used cards
     dealer(play1_hand, starting_hand, deck, used_cards)
     dealer(play2_hand, starting_hand, deck, used_cards)
-
+    
+    #scoreboard
     scorep1 = 0
     scorep2 = 0
+
+    #round log for pd/sns datasets
+    round_log = []
 
     round_leader = random.choice(["Player 1", "Player 2"])
     print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
@@ -168,6 +158,9 @@ def main():
         
         lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
         results = card_comparison(card1, card2, lead_face, round_leader)
+
+        #for pandas(pd): logs each round's winner for DataFrame
+        round_log.append({"Round": round_number, "Winner": results})
 
         if results == "Player 1":
             print("Player 1 wins this round!")
@@ -251,3 +244,17 @@ if __name__ == "__main__":
                 # card1 = input("Player 1, choose your card: ")
                 # print("Player 1's Hand: ", play1_hand)
             # play1_hand.remove(card1)
+
+
+        # UNFINISHED *****
+            # if face1 == face2:
+                # if val1 > val2:
+                    # return "Player 1"
+                # elif val2 > val1:
+                    # return "Player 2"
+                # else:
+                    # return starting_player
+            # elif face1 == lead_face and face2 != lead_face:
+                # return "Player 1"
+            # elif face2 == lead_face and face1 != lead_face:
+                # return "Player 2"

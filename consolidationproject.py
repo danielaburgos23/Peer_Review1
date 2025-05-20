@@ -140,11 +140,10 @@ def main():
     round_leader = random.choice(["Player 1", "Player 2"])
     print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
 
-# beginning of game code blocks
-
+    # beginning of game code for loop
     for round_number in range(1, total_rounds, + 1):
 
-# beginning of if/else/elif game code blocks
+        # presents the round number, player 1, and player 2's hands
         print("Round: ", round_number)
         print("Player 1's Hand: ", play1_hand)
         print("\nPlayer 2's Hand: ", play2_hand)
@@ -156,12 +155,14 @@ def main():
             card2 = valid_cards("Player 2's hand: ", play2_hand) 
             card1 = valid_cards("Player 1's hand: ", play1_hand)
         
+        # compares card to determine the lead face card the other player has to follow
         lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
         results = card_comparison(card1, card2, lead_face, round_leader)
 
-        #for pandas(pd): logs each round's winner for DataFrame
+        # for pandas(pd): logs each round's winner for DataFrame
         round_log.append({"Round": round_number, "Winner": results})
 
+        # adds score to scoreboard after every round
         if results == "Player 1":
             print("Player 1 wins this round!")
             scorep1 += 1
@@ -171,9 +172,10 @@ def main():
             scorep2 += 1
             round_leader = "Player 2"
 
+        # presents score to players after every round
         print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
-        # brn module to burn top card at the end of each round
+        # burn module to burn top card at the end of each round
         burn_card(deck, used_cards)
 
         # ------- time.sleep(2.0)
@@ -194,7 +196,7 @@ def main():
        
     
 
-# special conditions: shoot the moon mech
+    # special conditions: shoot the moon mech
     if  scorep2 == 0 and scorep1 == shoot_moon:
             print("Player 2 shoots the moon and WINS with 17 points!")
             scorep2 = 17
@@ -211,6 +213,21 @@ def main():
         print("Player 2 Wins Tricksy Battle! Congratulations!")
     else:
         print("It's a tie!")
+   
+    # pd: convert logs to DataFrame and saves to CSV
+    df = pd.DataFrame(round_log)
+    df.to_csv("round_log.csv", index=False)
+    print("Round-by-round log saved to 'round_log.csv'")
+
+    # sns: create and save a visual chart of each round win(s)
+    import matplotlib.pyplot as plt
+    sns.countplot(x="Winner", data=df)
+    plt.title("Rounds Won per Player")
+    plt.xlabel("Player")
+    plt.ylabel("Rounds Won")
+    plt.savefig("rounds_won_chart.png")
+    print("Round win chart saved as 'rounds_won_chart.png'")
+
 
 if __name__ == "__main__":
     main()

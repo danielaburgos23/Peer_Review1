@@ -164,7 +164,65 @@ def main():
         else:
             card2 = valid_cards("Player 2's hand: ", play2_hand) 
             card1 = valid_cards("Player 1's hand: ", play1_hand)
+        
+        lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
+        results = card_comparison(card1, card2, lead_face, round_leader)
 
+        if results == "Player 1":
+            print("Player 1 wins this round!")
+            scorep1 += 1
+            round_leader = "Player 1"
+        elif results == "Player 2":
+            print("Player 2 wins this round!")
+            scorep2 += 1
+            round_leader = "Player 2"
+
+        print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
+
+        # brn module to burn top card at the end of each round
+        burn_card(deck, used_cards)
+
+        time.sleep(2.0)
+
+        # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
+        if round_number in [5, 9]:
+            dealer(play1_hand, redraw_cards, deck, used_cards)
+            dealer(play2_hand, redraw_cards, deck, used_cards)
+            
+        # special conditions: early ending mechanic
+        elif scorep1 == earlymax_score and scorep1 - scorep2 >= 2:
+                print("Early Ending! Player 1 Wins!")
+                break
+
+        elif scorep2 == earlymax_score and scorep2 - scorep1 >= 2:
+                print("Early Ending! Player 2 Wins!")
+                break
+       
+    
+
+# special conditions: shoot the moon mech
+    if  scorep2 == 0 and scorep1 == total_rounds:
+            print("Player 2 shoots the moon and WINS with 17 points!")
+            scorep2 = 17
+            
+    elif  scorep1 == 0 and scorep2 == total_rounds:
+            print("Player 1 shoots the moon and WINS with 17 points!")
+            scorep1 = 17
+            
+    # final scoreboard/decider
+    print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
+    if scorep1 > scorep2:
+        print("Player 1 Wins Tricksy Battle! Congratulations!")
+    elif scorep2 > scorep1:
+        print("Player 2 Wins Tricksy Battle! Congratulations!")
+    else:
+        print("It's a tie!")
+
+if __name__ == "__main__":
+    main()
+
+
+# ````````` spare code ```````````` #
         # if round_leader == "Player 1":
             # card1 = input("Player 1, choose your card: ")
             # while card1 not in play1_hand:
@@ -192,49 +250,3 @@ def main():
                 # card1 = input("Player 1, choose your card: ")
                 # print("Player 1's Hand: ", play1_hand)
             # play1_hand.remove(card1)
-        
-        lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
-        results = card_comparison(card1, card2, lead_face, round_leader)
-
-        if results == "Player 1":
-            print("Player 1 wins this round!")
-            scorep1 += 1
-            round_leader = "Player 1"
-        elif results == "Player 2":
-            print("Player 2 wins this round!")
-            scorep2 += 1
-            round_leader = "Player 2"
-
-        print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
-
-        # new via module
-        burn_card(deck, used_cards)
-
-        time.sleep(2.0)
-
-        # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
-        if round_number in [5, 9]:
-            dealer(play1_hand, redraw_cards, deck, used_cards)
-            dealer(play2_hand, redraw_cards, deck, used_cards)
-
-        # special conditions: shoot the moon mech
-        if scorep1 == total_rounds:
-                print("Player 2 shoots the moon and WINS with 17 points!")
-                break
-        elif scorep2 == total_rounds:
-                print("Player 1 shoots the moon and WINS with 17 points!")
-                break
-        else:
-                print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
-            
-        # special conditions: early ending mechanic
-        if scorep1 == earlymax_score and scorep2 == minimum_score:
-                print("Early Ending! Player 1 Wins!")
-                break
-
-        elif scorep2 == earlymax_score and scorep1 == minimum_score:
-                print("Early Ending! Player 2 Wins!")
-                break
-
-if __name__ == "__main__":
-    main()

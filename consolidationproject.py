@@ -11,41 +11,29 @@ import seaborn as sns
 value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
 used_cards = []
-# deck = []
 
 #static values as variables
 minimum_score = 1
 starting_hand = 8
 redraw_cards = 4
 earlymax_score = 9
-max_score = 17 #shoot the moon makes it 17
+max_score = 17
 total_rounds = 17
 shoot_moon = 16
 
 value_dict = {"Ace": 1, "2": 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Jack': 11, 'Queen': 12}
 face_dict = {"Hearts": 1, "Diamonds": 2, "Spades": 3, "Clubs": 4}   
 
-# creating cards function heree (again)
+# creates a genuine deck with no repeats
 def create_deck():
     """
 
-    Creates and shuffles a standard deck without the Kings face card.
+    Creates and shuffles a deck without the Kings face card.
    
     """
     return[f"{v} of {f}" for v in value for f in face]
 
-
-#other variation of above^ except 100 steps longer
-    # complete_deck = []
-    # for value_thing in value:
-        # for face_thing in face:
-            # card = value_thing + ' of ' + face_thing
-            # complete_deck.append(card)
-    # random.shuffle(complete_deck)
-    # return complete_deck
-
-    
-#dealer mechanic, come back later, back working on this mech again (5/17)
+#dealer function to simulate real dealer mechanics
 def dealer(hand, count, deck, used_cards):
     """
     
@@ -57,7 +45,6 @@ def dealer(hand, count, deck, used_cards):
             card = deck.pop()
             hand.append(card)
             used_cards.append(card)
-            
 
 # card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
 def card_breakdown(card):
@@ -99,12 +86,9 @@ def valid_cards(player_name, hand, lead_face=None):
     """
     while True:
         card = input(f"{player_name}, pick a card please!")
-        
         if card not in hand:
             print("Invalid choice. Please try again.")
             continue
-        # new addition, re-check after new playthrough
-
         card_face = card.split(" of ")[1]
         player_lead = False
         for h in hand:
@@ -117,24 +101,29 @@ def valid_cards(player_name, hand, lead_face=None):
             continue
         hand.remove(card)
         return card
+    
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~ THIS IS WHERE THE GAME BEGINS ~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+
 def main():
     deck = create_deck()
     random.shuffle(deck)
 
+    # list of (future) cards in each player's hand 
     play1_hand = []
     play2_hand = []
     
-    #dealer mechanic to deal cards and rid of used cards
+    # dealer mechanic to deal cards and log used cards to prevent reusing
     dealer(play1_hand, starting_hand, deck, used_cards)
     dealer(play2_hand, starting_hand, deck, used_cards)
     
-    #scoreboard
+    # scoreboard
     scorep1 = 0
     scorep2 = 0
 
-    #round log for pd/sns datasets
+    # round log for pd/sns datasets
     round_log = []
 
     round_leader = random.choice(["Player 1", "Player 2"])
@@ -147,6 +136,9 @@ def main():
         print("Round: ", round_number)
         print("Player 1's Hand: ", play1_hand)
         print("\nPlayer 2's Hand: ", play2_hand)
+        
+        # Gives players time to read their hands and make a decision/strategize/etc
+        time.sleep(2.5)
 
         if round_leader == "Player 1":
             card1 = valid_cards("Player 1's hand: ", play1_hand)
@@ -165,20 +157,25 @@ def main():
         # adds score to scoreboard after every round
         if results == "Player 1":
             print("Player 1 wins this round!")
+            # lets players read the prompts, adds better flow to the game
+            time.sleep(1.8)
             scorep1 += 1
             round_leader = "Player 1"
         elif results == "Player 2":
             print("Player 2 wins this round!")
+            # lets players read the prompts, adds better flow to the game
+            time.sleep(1.8)
             scorep2 += 1
             round_leader = "Player 2"
 
         # presents score to players after every round
         print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
+        # gives players to read scoreboard after every round
+        time.sleep(1.8)
+
         # burn module to burn top card at the end of each round
         burn_card(deck, used_cards)
-
-        # ------- time.sleep(2.0)
 
         # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
         if round_number in [5, 9]:
@@ -231,47 +228,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# ````````` spare code ```````````` #
-        # if round_leader == "Player 1":
-            # card1 = input("Player 1, choose your card: ")
-            # while card1 not in play1_hand:
-                # print("Invalid choice. Try again: ")
-                # card1 = input("Player 1, choose your card: ")
-                # print("Player 1's Hand: ", play1_hand)
-            # play1_hand.remove(card1)
-            
-            # card2 = input("Player 2, choose your card: ")
-            # while card2 not in play2_hand:
-                # print("Invalid choice. Try again: ")
-                # card2 = input("Player 2, choose your card: ")
-                # print("Player 1's Hand: ", play1_hand)
-            # play2_hand.remove(card2)
-        # else:
-            # card2 = input("Player 2, choose your card: ")
-            # while card2 not in play2_hand:
-                # print("Invalid choice. Try again: ")
-                # print("Player 1's Hand: ", play1_hand)
-            # play2_hand.remove(card2)
-
-            # card1 = input("Player 1, choose your card: ")
-            # while card1 not in play1_hand:
-                # print("Invalid choice. Try again: ")
-                # card1 = input("Player 1, choose your card: ")
-                # print("Player 1's Hand: ", play1_hand)
-            # play1_hand.remove(card1)
-
-
-        # UNFINISHED *****
-            # if face1 == face2:
-                # if val1 > val2:
-                    # return "Player 1"
-                # elif val2 > val1:
-                    # return "Player 2"
-                # else:
-                    # return starting_player
-            # elif face1 == lead_face and face2 != lead_face:
-                # return "Player 1"
-            # elif face2 == lead_face and face1 != lead_face:
-                # return "Player 2"

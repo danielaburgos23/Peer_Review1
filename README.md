@@ -26,7 +26,7 @@ Two players go head-to-head in a strategic card game called 'Tricksy Battle'. Ea
 
 - Modular code structure
 - Custom card deck generation
-- Burn ~imported module~ to burn top card(s)
+- Burn *imported module* to burn top card(s)
 - Card breakdown via value/suit dictionaries
 - Randomized starting player via coin flip
 - Redraw cards at rounds 5 and 9

@@ -3,6 +3,9 @@ import os
 import random
 import time
 from burn_module import burn_card
+import pandas as pd
+import seaborn as sns
+
 
 # defining and giving each aspect of the card a value and a face (AKA diamonds, hearts, etc etc)
 value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen"]
@@ -11,11 +14,12 @@ used_cards = []
 # deck = []
 
 #static values as variables
+minimum_score = 1
 starting_hand = 8
 redraw_cards = 4
 earlymax_score = 9
 max_score = 17 #shoot the moon makes it 17
-total_rounds = 16
+total_rounds = 17
 
 value_dict = {"Ace": 1, "2": 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Jack': 11, 'Queen': 12}
 face_dict = {"Hearts": 1, "Diamonds": 2, "Spades": 3, "Clubs": 4}   
@@ -208,24 +212,29 @@ def main():
 
         time.sleep(2.0)
 
-# redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
+        # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
         if round_number in [5, 9]:
             dealer(play1_hand, redraw_cards, deck, used_cards)
             dealer(play2_hand, redraw_cards, deck, used_cards)
 
-    if scorep1 == total_rounds and scorep2 == 0:
-            print("Player 2 shoots the moon and WINS with 17 points!")
-    elif scorep2 == total_rounds and scorep1 == 0:
-            print("Player 1 shoots the moon and WINS with 17 points!")
-    else:
-            print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
-        
-    # special conditions: early ending mechanic
-    if scorep1 >+ earlymax_score and scorep2 == 1:
-            print("Early Ending! Player 1 Wins!")
+        # special conditions: shoot the moon mech
+        if scorep1 == total_rounds:
+                print("Player 2 shoots the moon and WINS with 17 points!")
+                break
+        elif scorep2 == total_rounds:
+                print("Player 1 shoots the moon and WINS with 17 points!")
+                break
+        else:
+                print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
             
-    elif scorep2 >+ earlymax_score and scorep1 == 1:
-            print("Early Ending! Player 2 Wins!")
+        # special conditions: early ending mechanic
+        if scorep1 == earlymax_score and scorep2 == minimum_score:
+                print("Early Ending! Player 1 Wins!")
+                break
+
+        elif scorep2 == earlymax_score and scorep1 == minimum_score:
+                print("Early Ending! Player 2 Wins!")
+                break
 
 if __name__ == "__main__":
     main()

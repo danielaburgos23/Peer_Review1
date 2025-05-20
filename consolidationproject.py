@@ -20,6 +20,7 @@ redraw_cards = 4
 earlymax_score = 9
 max_score = 17 #shoot the moon makes it 17
 total_rounds = 17
+shoot_moon = 16
 
 value_dict = {"Ace": 1, "2": 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Jack': 11, 'Queen': 12}
 face_dict = {"Hearts": 1, "Diamonds": 2, "Spades": 3, "Clubs": 4}   
@@ -182,7 +183,7 @@ def main():
         # brn module to burn top card at the end of each round
         burn_card(deck, used_cards)
 
-        time.sleep(2.0)
+        # ------- time.sleep(2.0)
 
         # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
         if round_number in [5, 9]:
@@ -201,11 +202,11 @@ def main():
     
 
 # special conditions: shoot the moon mech
-    if  scorep2 == 0 and scorep1 == total_rounds:
+    if  scorep2 == 0 and scorep1 == shoot_moon:
             print("Player 2 shoots the moon and WINS with 17 points!")
             scorep2 = 17
             
-    elif  scorep1 == 0 and scorep2 == total_rounds:
+    elif  scorep1 == 0 and scorep2 == shoot_moon:
             print("Player 1 shoots the moon and WINS with 17 points!")
             scorep1 = 17
             

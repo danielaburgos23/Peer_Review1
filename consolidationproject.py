@@ -1,5 +1,8 @@
-# consolidation project.
+# Consolidation project.
 import os
+
+# Use of Advanced Topics:
+# Final Project Requirements!
 import random
 import time
 from burn_module import burn_card
@@ -7,12 +10,12 @@ import pandas as pd
 import seaborn as sns
 
 
-# defining and giving each aspect of the card a value and a face (AKA diamonds, hearts, etc etc)
+# Defining and giving each aspect of the card a value and a face (AKA diamonds, hearts, etc etc)
 value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen"]
 face = ["Hearts", "Diamonds", "Spades", "Clubs"]
 used_cards = []
 
-#static values as variables
+# Static values as variables
 minimum_score = 1
 starting_hand = 8
 redraw_cards = 4
@@ -24,7 +27,7 @@ shoot_moon = 16
 value_dict = {"Ace": 1, "2": 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Jack': 11, 'Queen': 12}
 face_dict = {"Hearts": 1, "Diamonds": 2, "Spades": 3, "Clubs": 4}   
 
-# creates a genuine deck with no repeats
+# Creates a genuine deck with no repeats
 def create_deck():
     """
 
@@ -33,7 +36,7 @@ def create_deck():
     """
     return[f"{v} of {f}" for v in value for f in face]
 
-#dealer function to simulate real dealer mechanics
+# Dealer function to simulate real dealer mechanics
 def dealer(hand, count, deck, used_cards):
     """
     
@@ -46,7 +49,7 @@ def dealer(hand, count, deck, used_cards):
             hand.append(card)
             used_cards.append(card)
 
-# card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
+# Card breakdown system so each card is genuine (and not copied by storing in the dictionaries afterward)
 def card_breakdown(card):
     """
     
@@ -56,7 +59,7 @@ def card_breakdown(card):
     val, face = card.split(' of ')
     return value_dict[val], face_dict[face]
 
-# card comparison system/callback to decide winners of each round
+# Card comparison system/callback to decide winners of each round
 def card_comparison(card1, card2, lead_face, starting_player):
     """
     
@@ -77,7 +80,7 @@ def card_comparison(card1, card2, lead_face, starting_player):
     elif face2 == lead_face and face1 != lead_face:
         return "Player 2"
 
-# checks to see if player card chosen is valid
+# Checks to see if player card chosen is valid
 def valid_cards(player_name, hand, lead_face=None):
     """
     
@@ -111,28 +114,28 @@ def main():
     deck = create_deck()
     random.shuffle(deck)
 
-    # list of (future) cards in each player's hand 
+    # List of (future) cards in each player's hand 
     play1_hand = []
     play2_hand = []
     
-    # dealer mechanic to deal cards and log used cards to prevent reusing
+    # Dealer mechanic to deal cards and log used cards to prevent reusing
     dealer(play1_hand, starting_hand, deck, used_cards)
     dealer(play2_hand, starting_hand, deck, used_cards)
     
-    # scoreboard
+    # Scoreboard
     scorep1 = 0
     scorep2 = 0
 
-    # round log for pd/sns datasets
+    # Round log for pd/sns datasets
     round_log = []
 
     round_leader = random.choice(["Player 1", "Player 2"])
     print(f"The Round Leader is... {round_leader}! Congratulations! The Game Will Now Begin!")
 
-    # beginning of game code for loop
+    # Beginning of game code for loop
     for round_number in range(1, total_rounds, + 1):
 
-        # presents the round number, player 1, and player 2's hands
+        # Presents the round number, player 1, and player 2's hands
         print("Round: ", round_number)
         print("Player 1's Hand: ", play1_hand)
         print("\nPlayer 2's Hand: ", play2_hand)
@@ -147,42 +150,42 @@ def main():
             card2 = valid_cards("Player 2's hand: ", play2_hand) 
             card1 = valid_cards("Player 1's hand: ", play1_hand)
         
-        # compares card to determine the lead face card the other player has to follow
+        # Compares card to determine the lead face card the other player has to follow
         lead_face = face_dict[card1.split(' of ')[1]] if round_leader == "Player 1" else face_dict[card2.split(' of ')[1]]
         results = card_comparison(card1, card2, lead_face, round_leader)
 
-        # for pandas(pd): logs each round's winner for DataFrame
+        # For pandas(pd): logs each round's winner for DataFrame
         round_log.append({"Round": round_number, "Winner": results})
 
-        # adds score to scoreboard after every round
+        # Adds score to scoreboard after every round
         if results == "Player 1":
             print("Player 1 wins this round!")
-            # lets players read the prompts, adds better flow to the game
+            # Lets players read the prompts, adds better flow to the game
             time.sleep(1.8)
             scorep1 += 1
             round_leader = "Player 1"
         elif results == "Player 2":
             print("Player 2 wins this round!")
-            # lets players read the prompts, adds better flow to the game
+            # Lets players read the prompts, adds better flow to the game
             time.sleep(1.8)
             scorep2 += 1
             round_leader = "Player 2"
 
-        # presents score to players after every round
+        # Presents score to players after every round
         print(f"Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
 
-        # gives players to read scoreboard after every round
+        # Gives players to read scoreboard after every round
         time.sleep(1.8)
 
-        # burn module to burn top card at the end of each round
+        # Burn module to burn top card at the end of each round
         burn_card(deck, used_cards)
 
-        # redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
+        # Redrawing cards on rounds 5 and 9 (when both players have 4 cards left)
         if round_number in [5, 9]:
             dealer(play1_hand, redraw_cards, deck, used_cards)
             dealer(play2_hand, redraw_cards, deck, used_cards)
             
-        # special conditions: early ending mechanic
+        # Special conditions: early ending mechanic
         elif scorep1 == earlymax_score and scorep1 - scorep2 >= 2:
                 print("Early Ending! Player 1 Wins!")
                 break
@@ -193,7 +196,7 @@ def main():
        
     
 
-    # special conditions: shoot the moon mech
+    # Special conditions: shoot the moon mech
     if  scorep2 == 0 and scorep1 == shoot_moon:
             print("Player 2 shoots the moon and WINS with 17 points!")
             scorep2 = 17
@@ -202,7 +205,7 @@ def main():
             print("Player 1 shoots the moon and WINS with 17 points!")
             scorep1 = 17
             
-    # final scoreboard/decider
+    # Final scoreboard/decider
     print(f"Final Scores:\n Player 1: {scorep1}\n Player 2: {scorep2}")
     if scorep1 > scorep2:
         print("Player 1 Wins Tricksy Battle! Congratulations!")
@@ -210,13 +213,21 @@ def main():
         print("Player 2 Wins Tricksy Battle! Congratulations!")
     else:
         print("It's a tie!")
+
+    # Suggestion: Add `>=` so that edge scores (like 90, 80, 70) are handled correctly:
+    # if scorep1 >= scorep2:
+    #     print("Player 1 Wins Tricksy Battle! Congratulations!")
+    # elif scorep2 >= scorep1:
+    #     print("Player 2 Wins Tricksy Battle! Congratulations!")
+    # else:
+    #     print("It's a tie!")
    
-    # pd: convert logs to DataFrame and saves to CSV
+    # pd: Convert logs to DataFrame and saves to CSV
     df = pd.DataFrame(round_log)
     df.to_csv("round_log.csv", index=False)
     print("Round-by-round log saved to 'round_log.csv'")
 
-    # sns: create and save a visual chart of each round win(s)
+    # sns: Create and save a visual chart of each round win(s)
     import matplotlib.pyplot as plt
     sns.countplot(x="Winner", data=df)
     plt.title("Rounds Won per Player")
